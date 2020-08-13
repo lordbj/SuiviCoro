@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{../css/materialize.css}" />
+    <script  type="text/javascript" th:src="@{../js/materialize.js}"></script>
+    <script  type="text/javascript" th:src="@{../js/materialize.min.js}"></script>
+    <script type = "text/javascript"
+            src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+    </script>
+</head>
+<body>
+
+<!-- Include menu -->
+<div th:replace="menu/menu :: navbar">
+
+</div>
+<!--  -->
+<div class="row">
+    <div class="col s4 push-s8">
+        <div class="card-panel transparent">
+            <div class=" card-panel grey darken-3  white-text">FORMULAIRE D'AJOUT</div>
+            <div class="panel-body">
+                <div class="row">
+                    <form  method="Post" th:action="@{/Roles/add}" th:object="${role}" class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <label for="nom">NOM</label>
+                                <input placeholder="NOM" id="nom"  name="nom" th:field="*{nom}" type="text" class="validate">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <button class="btn waves-effect waves-light blue" type="submit" name="valider">
+                                    <i class="material-icons right">send</i>
+                                </button>
+                                <button class="btn waves-effect waves-light grey" type="reset" name="annuler">
+                                    <i class="material-icons right">cancel</i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s8 pull-s4">
+        <div class="card-panel transparent">
+            <div class="card-panel grey darken-3   white-text">LISTE DES ROLES</div>
+            <div class="panel-body">
+                <table class="highlight ">
+                    <thead>
+                    <tr>
+                        <th>ROLES</th>
+                        <th>Action</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <!-->
+                    <!-->
+                    <tr th:each="r:${liste_roles}">
+                        <td th:text="${r.nom}"></td>
+                        <td><a class="btn waves-effect waves-light " th:href="@{/Roles/edit(nom=${r.nom})}"><i class="material-icons left">edit</i></a></td>
+                        <td><a class="btn waves-effect waves-light red" th:href="@{/Roles/delete(nom=${r.nom})}"><i class="material-icons left">delete</i></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
